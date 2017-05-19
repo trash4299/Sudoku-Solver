@@ -7,22 +7,6 @@ public  class TableExample extends JFrame
 {
     public TableExample()
     {
-        /*
-        String[] columns = new String[] {"A", "B", "C", "D","E","F","G","H","I"};
-        Object[][] data = new Object[][] 
-        {
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0}
-        };
-        JTable table = new JTable(data, columns);
-        */
         JTable table = new JTable(9,9);
         this.add(new JScrollPane(table));
         this.setTitle("Table Example");
