@@ -6,19 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-public class TableExample extends JFrame implements ActionListener
+public class TableGui extends JFrame implements ActionListener
 {
     public JTable table;
     private JPanel p;
-    private JPanel q;
     private JButton b1;
     private boolean in;
     
     @Override
-    public void actionPerformed(ActionEvent ae)
-    {
-    }
-    public TableExample()
+    public void actionPerformed(ActionEvent ae){}
+    public TableGui()
     {
         in = false;
         JPanel p = new JPanel();
@@ -35,8 +32,7 @@ public class TableExample extends JFrame implements ActionListener
 
             public void actionPerformed(ActionEvent e)
             {
-                in = true;
-                System.out.print("hooray2");
+                in = true;  
             }
         }); 
         
@@ -49,16 +45,17 @@ public class TableExample extends JFrame implements ActionListener
             // just waits for button to be pressed
         }
         //figure out how to close window
+        setVisible(false);
     }
     
-    public TableExample(int [][] enter)
+    public TableGui(Square [][] enter)
     {
         this.setTitle("Solution");
         for(int x=0; x<9;x++)
         {
             for(int y=0; y<9;y++)
             {
-                table.setValueAt(enter[x][y],x,y);
+                table.setValueAt(enter[x][y].finnum,x,y);
             }
         }
         this.add(new JScrollPane(table));
