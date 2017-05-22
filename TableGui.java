@@ -12,11 +12,20 @@ public class TableGui extends JFrame implements ActionListener
     private JPanel p;
     private JButton b1;
     private boolean in;
+    public Square [][] elbow;
     
     @Override
     public void actionPerformed(ActionEvent ae){}
     public TableGui()
     {
+        elbow = new Square[9][9];
+        for (int x=0;x<9;x++)
+        {
+            for(int p=0;p<9;p++)
+            {
+                elbow[x][p]= new Square();
+            }
+        }
         in = false;
         JPanel p = new JPanel();
         JTable table = new JTable(9,9);
@@ -44,8 +53,20 @@ public class TableGui extends JFrame implements ActionListener
         {
             // just waits for button to be pressed
         }
-        //figure out how to close window
         setVisible(false);
+        
+        for(int a=0;a<9;a++)
+        {
+            for(int b=0;b<9;b++)
+            {
+                elbow[a][b].finnum= (int) table.getModel().getValueAt(a,b);
+            }
+        }
+    }
+    
+    public Square[][] give()
+    {
+        return elbow;
     }
     
     public TableGui(Square [][] enter)
