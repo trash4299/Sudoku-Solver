@@ -17,8 +17,6 @@ public class TableExample extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae)
     {
-        in = true;
-        System.out.print("hooray");
     }
     public TableExample()
     {
@@ -33,16 +31,24 @@ public class TableExample extends JFrame implements ActionListener
         p.add(new JScrollPane(table));
         this.add(p);
         
+        b1.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                in = true;
+                System.out.print("hooray2");
+            }
+        }); 
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
         this.pack();
         this.setVisible(true);
         
-        int x=0;
         while(in == false)
         {
-            System.out.print(x);
-            x++;
+            // just waits for button to be pressed
         }
+        //figure out how to close window
     }
     
     public TableExample(int [][] enter)
