@@ -13,28 +13,31 @@ public class Solver
                 things[x][p]= new Square();
             }
         }
-        //Starts UI for inputting numbers
+        inputGui();
+        inputValues();
+        solvin();
+        solutionGui();
     }
     
-    //UI starts with an input for numbers and then runs solver
+    public void inputGui()
+    {
+        TableGui beginning = new TableGui();
+    }
     
-    public void ui()
+    public void inputValues()
     {
         
+		//System.out.print(nine.table.getModel().getValueAt(row_index, col_index));
     }
-    
-    //seperated out the inputererer to make it cleaner
-    
-    public void input()
-    {
-        
-    }
-    
-    //seperated out the solver program to make it cleaner
     
     public void solvin()
     {
         
+    }
+    
+    public void solutionGui()
+    {
+        TableGui solved = new TableGui(things);
     }
     
     public boolean checkfinal(Square sample)
