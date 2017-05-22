@@ -2,7 +2,6 @@
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -60,15 +59,5 @@ public class TableExample extends JFrame implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
         this.pack();
         this.setVisible(true);
-    }
-    
-    public static void main()
-    {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TableExample();
-            }
-        });
     }
 }
