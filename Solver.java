@@ -2,42 +2,28 @@
 
 public class Solver
 {
-    public Square[][] things;
     public Solver()
     {
-        things = new Square[9][9];
-        for (int x=0;x<9;x++)
-        {
-            for(int p=0;p<9;p++)
-            {
-                things[x][p]= new Square();
-            }
-        }
-        inputGui();
-        inputValues();
-        solvin();
-        solutionGui();
+        solutionGui(solvin(inputGui()));
     }
     
-    public void inputGui()
+    public Square [][] inputGui()
     {
         TableGui beginning = new TableGui();
+        return beginning.give();
     }
     
-    public void inputValues()
+    public Square[][] solvin(Square[][] enter)
     {
         
-		//System.out.print(nine.table.getModel().getValueAt(row_index, col_index));
-    }
-    
-    public void solvin()
-    {
         
+        Square [][] poop = new Square [9][9];
+        return poop;
     }
     
-    public void solutionGui()
+    public void solutionGui(Square [][] fin)
     {
-        TableGui solved = new TableGui(things);
+        TableGui solved = new TableGui(fin);
     }
     
     public boolean checkfinal(Square sample)
