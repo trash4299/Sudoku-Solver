@@ -4,7 +4,8 @@ public class Solver
 {
     public Solver()
     {
-        solutionGui(solvin(inputGui()));
+        solvin(inputGui());
+        //solutionGui();
     }
     
     public Square [][] inputGui()
