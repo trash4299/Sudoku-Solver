@@ -59,7 +59,12 @@ public class TableGui extends JFrame implements ActionListener
         {
             for(int b=0;b<9;b++)
             {
-                elbow[a][b].finnum= (int) table.getModel().getValueAt(a,b);
+                if(table.getModel().getValueAt(a,b)!=null)
+                {
+                    String temp = (String) table.getModel().getValueAt(a,b);
+                    elbow[a][b].finnum= Integer.parseInt(temp);
+                    elbow[a][b].changeFin();
+                }
             }
         }
     }
