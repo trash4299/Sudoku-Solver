@@ -17,17 +17,4 @@ public class Square
         i=true;
         fin=false;
     }
-    public void changeFin()
-    {
-        a=false;
-        b=false;
-        c=false;
-        d=false;
-        e=false;
-        f=false;
-        g=false;
-        h=false;
-        i=false;
-        fin=true;
-    }
 }
