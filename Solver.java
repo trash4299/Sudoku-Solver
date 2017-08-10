@@ -6,8 +6,8 @@ public class Solver
     public Solver()
     {
         enter=inputGui();
-        solvin();
-        //solutionGui();
+        solutionGui(solvin());
+        
     }
     
     public Square [][] inputGui()
@@ -19,11 +19,15 @@ public class Solver
     public Square[][] solvin()
     {
         int num = 0;
-        while(num==0)
+        int temporary =0;
+        do
         {
+            temporary++;
             num=0;
+            System.out.println(temporary);
             for(int alpha=0;alpha<9;alpha++)
             {
+                System.out.print("  Alpha:"+alpha);
                 for(int beta=0;beta<9;beta++)
                 {
                     if(enter[alpha][beta].fin==false)
@@ -39,9 +43,11 @@ public class Solver
                     {
                         setFinal(enter[alpha][beta]);
                     }
+                    System.out.print("  Beta:"+beta);
                 }
             }
-        }
+            System.out.println(num);
+        }while(num!=0);
         return enter;
     }
     
@@ -59,6 +65,8 @@ public class Solver
             {
                 if(enter[f][y].fin==true)
                 {
+                    
+                   // /*
                     switch(enter[f][y].finnum)
                     {
                         case 1:enter[x][y].a=false;counter++;break;
@@ -71,6 +79,7 @@ public class Solver
                         case 8:enter[x][y].h=false;counter++;break;
                         case 9:enter[x][y].i=false;counter++;break;
                     }
+                    //*/
                 }
             }
         }
@@ -372,26 +381,26 @@ public class Solver
     
     public boolean checkFinal(Square sample)
     {
-        int num=0;
+        int yeck=0;
         if(sample.a==true)
-            num++;
+            yeck++;
         if(sample.b==true)
-            num++;
+            yeck++;
         if(sample.c==true)
-            num++;
+            yeck++;
         if(sample.d==true)
-            num++;
+            yeck++;
         if(sample.e==true)
-            num++;
+            yeck++;
         if(sample.f==true)
-            num++;
+            yeck++;
         if(sample.g==true)
-            num++;
+            yeck++;
         if(sample.h==true)
-            num++;
+            yeck++;
         if(sample.i==true)
-            num++;
-        if(num==1)
+            yeck++;
+        if(yeck==1)
             return true;
         return false;
     }
