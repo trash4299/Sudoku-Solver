@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumnModel;
 public class TableGui extends JFrame implements ActionListener
 {
     public JTable table;
@@ -29,6 +30,12 @@ public class TableGui extends JFrame implements ActionListener
         in = false;
         JPanel p = new JPanel();
         JTable table = new JTable(9,9);
+        table.setRowHeight(40);
+        TableColumnModel columnModel = table.getColumnModel();
+        for(int x=0;x<9;x++)
+        {
+            columnModel.getColumn(x).setPreferredWidth(15);
+        }
         this.setTitle("Enter Known Values");
         
         JButton b1 = new JButton("Click Here to Begin!");
@@ -41,7 +48,7 @@ public class TableGui extends JFrame implements ActionListener
 
             public void actionPerformed(ActionEvent e)
             {
-                in = true;  
+                in = true;
             }
         }); 
         
@@ -59,11 +66,30 @@ public class TableGui extends JFrame implements ActionListener
         {
             for(int b=0;b<9;b++)
             {
-                if(table.getModel().getValueAt(a,b)!=null)
+                String temp = (String) table.getModel().getValueAt(a,b);
+                if(temp!=null&&temp!="")
                 {
-                    String temp = (String) table.getModel().getValueAt(a,b);
-                    elbow[a][b].finnum= Integer.parseInt(temp);
-                    elbow[a][b].changeFin();
+                    int schlep = Integer.parseInt(temp);
+                    elbow[a][b].finnum= schlep;
+                    elbow[a][b].fin=true;
+                    if(schlep!=1)
+                        elbow[a][b].a=false;
+                    if(schlep!=2)
+                        elbow[a][b].b=false;
+                    if(schlep!=3)
+                        elbow[a][b].c=false;
+                    if(schlep!=4)
+                        elbow[a][b].d=false;
+                    if(schlep!=5)
+                        elbow[a][b].e=false;
+                    if(schlep!=6)
+                        elbow[a][b].f=false;
+                    if(schlep!=7)
+                        elbow[a][b].g=false;
+                    if(schlep!=8)
+                        elbow[a][b].h=false;
+                    if(schlep!=9)
+                        elbow[a][b].i=false;
                 }
             }
         }
