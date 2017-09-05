@@ -7,7 +7,6 @@ public class Solver
     {
         enter=inputGui();
         solutionGui(solvin());
-        
     }
     
     public Square [][] inputGui()
@@ -38,15 +37,18 @@ public class Solver
                             num++;
                         if(squareChecker(alpha,beta)==true)
                             num++;
-                    }                    
-                    if(checkFinal(enter[alpha][beta])==true)
-                    {
-                        setFinal(enter[alpha][beta]);
                     }
+                    if(horiSevenEight(beta)==true)
+                        num++;
+                    setFinal(enter[alpha][beta]);
+                    if(vertSevenEight(beta)==true)
+                        num++;
                     System.out.print("  Beta:"+beta);
                 }
+                if(vertSevenEight(alpha)==true)
+                    num++;
             }
-            System.out.println(num);
+            System.out.println("    Num of changes: "+num);
         }while(num!=0);
         return enter;
     }
@@ -56,7 +58,7 @@ public class Solver
         TableGui solved = new TableGui(fin);
     }
     
-    private boolean rowChecker(int x, int y)
+    private boolean columnChecker(int x, int y)
     {
         int counter = 0;
         for(int f=0;f<9;f++)
@@ -65,8 +67,6 @@ public class Solver
             {
                 if(enter[f][y].fin==true)
                 {
-                    
-                   // /*
                     switch(enter[f][y].finnum)
                     {
                         case 1:enter[x][y].a=false;counter++;break;
@@ -79,7 +79,6 @@ public class Solver
                         case 8:enter[x][y].h=false;counter++;break;
                         case 9:enter[x][y].i=false;counter++;break;
                     }
-                    //*/
                 }
             }
         }
@@ -88,7 +87,7 @@ public class Solver
         return false;
     }
     
-    private boolean columnChecker(int x, int y)
+    private boolean rowChecker(int x, int y)
     {
         int counter = 0;
         for(int f=0;f<9;f++)
@@ -375,56 +374,122 @@ public class Solver
         if (counter>0)
             return true;
         return false;
+    }    
+    
+    public boolean vertSevenEight(int c)
+    {
+        int counte = 0;
+        int differenc = 0;
+        boolean checki = false;
+        for(int r=0;r<9;r++)
+        {
+            if(enter[c][r].fin==true)
+            {
+                counte++;
+                differenc= differenc+enter[c][r].finnum;
+            }
+        }
+        if(counte==7)
+        {
+            int missin = 45-differenc;
+            for(int r=0;r<9;r++)
+            {
+                if(enter[c][r].fin==false)
+                {
+                    enter[c][r].fin=true;
+                    enter[c][r].finnum=differenc;
+                }
+                checki=true;
+            }
+        }
+        if(checki==true)
+            return true;
+        return false;
     }
     
-    //FIND A WAY TO GET RID OF ALL THE IF STATEMENTS
+    public boolean horiSevenEight(int d)
+    {
+        int counte = 0;
+        int differenc = 0;
+        boolean checki = false;
+        for(int r=0;r<9;r++)
+        {
+            if(enter[r][d].fin==true)
+            {
+                counte++;
+                differenc= differenc+enter[r][d].finnum;
+            }
+        }
+        if(counte==7)
+        {
+            int missin = 45-differenc;
+            for(int r=0;r<9;r++)
+            {
+                if(enter[r][d].fin==false)
+                {
+                    enter[r][d].fin=true;
+                    enter[r][d].finnum=differenc;
+                }
+                checki=true;
+            }
+        }
+        if(checki==true)
+            return true;
+        return false;
+    }
     
     public boolean checkFinal(Square sample)
     {
-        int yeck=0;
-        if(sample.a==true)
-            yeck++;
-        if(sample.b==true)
-            yeck++;
-        if(sample.c==true)
-            yeck++;
-        if(sample.d==true)
-            yeck++;
-        if(sample.e==true)
-            yeck++;
-        if(sample.f==true)
-            yeck++;
-        if(sample.g==true)
-            yeck++;
-        if(sample.h==true)
-            yeck++;
-        if(sample.i==true)
-            yeck++;
-        if(yeck==1)
+        if(sample.fin==false)
+        {
+            int yeck=0;
+            if(sample.a==true)
+                yeck++;
+            if(sample.b==true)
+                yeck++;
+            if(sample.c==true)
+                yeck++;
+            if(sample.d==true)
+                yeck++;
+            if(sample.e==true)
+                yeck++;
+            if(sample.f==true)
+                yeck++;
+            if(sample.g==true)
+                yeck++;
+            if(sample.h==true)
+                yeck++;
+            if(sample.i==true)
+                yeck++;
+            if(yeck==1)
             return true;
+        }
         return false;
     }
     
     public void setFinal(Square in)
     {
-        if(in.a==true)
-            in.finnum=1;
-        else if(in.b==true)
-            in.finnum=2;
-        else if(in.c==true)
-            in.finnum=3;
-        else if(in.d==true)
-            in.finnum=4;
-        else if(in.e==true)
-            in.finnum=5;
-        else if(in.f==true)
-            in.finnum=6;
-        else if(in.g==true)
-            in.finnum=7;
-        else if(in.h==true)
-            in.finnum=8;
-        else if(in.i==true)
-            in.finnum=9;
-        in.fin=true;
+       if(checkFinal(in)==true)
+       {
+            if(in.a==true)
+                in.finnum=1;
+            else if(in.b==true)
+                in.finnum=2;
+            else if(in.c==true)
+                in.finnum=3;
+            else if(in.d==true)
+                in.finnum=4;
+            else if(in.e==true)
+                in.finnum=5;
+            else if(in.f==true)
+                in.finnum=6;
+            else if(in.g==true)
+                in.finnum=7;
+            else if(in.h==true)
+                in.finnum=8;
+            else if(in.i==true)
+                in.finnum=9;
+            in.fin=true;
+       }
     }
 }
