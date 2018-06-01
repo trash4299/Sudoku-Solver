@@ -10,7 +10,7 @@ public class Solver
     	new Solver();
     }
     
-    public Solver(){    
+    public Solver(){
         enter = new Square[9][9];
         for (int x=0;x<9;x++)
         {
@@ -60,40 +60,32 @@ public class Solver
         solutionGui(solvin());
     }
     
-    public Square [][] inputGui()
-    {
+    public Square [][] inputGui() {
         TableGui beginning = new TableGui();
         return beginning.give();
     }
     
-    public Square[][] solvin()
-    {
+    public Square[][] solvin(){
         long num = 0;
         long temporary =0;
-        do
-        {
+        do{
             temporary++;
             num=0;
             System.out.println(temporary);
-            for(int alpha=0;alpha<9;alpha++)
-            {
+            for(int alpha=0;alpha<9;alpha++) {
                 System.out.print("  Alpha:"+alpha);
-                for(int beta=0;beta<9;beta++)
-                {
-                    if(enter[alpha][beta].fin==false)
-                    {
+                for(int beta=0;beta<9;beta++){
+                    if(enter[alpha][beta].fin==false){
                         if(rowChecker(alpha,beta)==true)
                             num++;
                         setFinal(enter[alpha][beta]);
                     }
-                    if(enter[alpha][beta].fin==false)
-                    {
+                    if(enter[alpha][beta].fin==false){
                         if(columnChecker(alpha,beta)==true)
                             num++;
                         setFinal(enter[alpha][beta]);
                     }
-                    if(enter[alpha][beta].fin==false)
-                    {
+                    if(enter[alpha][beta].fin==false){
                         if(squareChecker(alpha,beta)==true)
                             num++;
                         setFinal(enter[alpha][beta]);
@@ -114,22 +106,16 @@ public class Solver
         return enter;
     }
     
-    public void solutionGui(Square [][] fin)
-    {
+    public void solutionGui(Square [][] fin) {
         new TableGui(fin);
     }
     
-    private boolean columnChecker(int x, int y)
-    {
+    private boolean columnChecker(int x, int y) {
         int counter = 0;
-        for(int f=0;f<9;f++)
-        {
-            if(f!=x)
-            {
-                if(enter[f][y].fin==true)
-                {
-                    switch(enter[f][y].finnum)
-                    {
+        for(int f=0;f<9;f++) {
+            if(f!=x){
+                if(enter[f][y].fin==true) {
+                    switch(enter[f][y].finnum) {
                         case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
                         case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
                         case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
@@ -148,17 +134,12 @@ public class Solver
         return false;
     }
     
-    private boolean rowChecker(int x, int y)
-    {
+    private boolean rowChecker(int x, int y) {
         int counter = 0;
-        for(int f=0;f<9;f++)
-        {
-            if(f!=y)
-            {
-                if(enter[x][f].fin==true)
-                {
-                    switch(enter[x][f].finnum)
-                    {
+        for(int f=0;f<9;f++) {
+            if(f!=y){
+                if(enter[x][f].fin==true) {
+                    switch(enter[x][f].finnum) {
                         case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
                         case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
                         case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
@@ -464,20 +445,16 @@ public class Solver
         return false;
     }    
     
-    public boolean vertEightNine(int c)
-    {
+    public boolean vertEightNine(int c) {
         int counte = 0;
         int differenc = 0;
-        for(int r=0;r<9;r++)
-        {
-            if(enter[c][r].fin==true)
-            {
+        for(int r=0;r<9;r++){
+            if(enter[c][r].fin==true) {
                 counte++;
                 differenc+=enter[c][r].finnum;
             }
         }
-        if(counte==8)
-        {
+        if(counte==8) {
             int missin = 45-differenc;
             for(int r=0;r<9;r++)
             {
@@ -492,25 +469,19 @@ public class Solver
         return false;
     }
     
-    public boolean horiEightNine(int d)
-    {
+    public boolean horiEightNine(int d) {
         int counte = 0;
         int differenc = 0;
-        for(int r=0;r<9;r++)
-        {
-            if(enter[r][d].fin==true)
-            {
+        for(int r=0;r<9;r++) {
+            if(enter[r][d].fin==true) {
                 counte++;
                 differenc= differenc+enter[r][d].finnum;
             }
         }
-        if(counte==8)
-        {
+        if(counte==8) {
             int missin = 45-differenc;
-            for(int r=0;r<9;r++)
-            {
-                if(enter[r][d].fin==false)
-                {
+            for(int r=0;r<9;r++) {
+                if(enter[r][d].fin==false) {
                     enter[r][d].fin=true;
                     enter[r][d].finnum=missin;
                     return true;
@@ -688,10 +659,8 @@ public class Solver
         return false;
     }
     
-    public boolean checkFinal(Square sample)
-    {
-        if(sample.fin==false)
-        {
+    public boolean checkFinal(Square sample) {
+        if(sample.fin==false) {
             int yeck=0;
             if(sample.a==true)
                 yeck++;
@@ -717,10 +686,8 @@ public class Solver
         return false;
     }
     
-    public void setFinal(Square in)
-    {
-       if(checkFinal(in)==true)
-       {
+    public void setFinal(Square in) {
+       if(checkFinal(in)==true) {
             if(in.a==true)
                 in.finnum=1;
             else if(in.b==true)
