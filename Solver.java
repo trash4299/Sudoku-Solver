@@ -2,7 +2,7 @@
 public class Solver
 {
     public Square[][] enter;
-    
+    int poo;
     //TESTING
     public int[][] temptest;
     
