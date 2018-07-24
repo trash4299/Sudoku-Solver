@@ -10,12 +10,10 @@ public class Solver
     	new Solver();
     }
     
-    public Solver(){
+    public Solver() {
         enter = new Square[9][9];
-        for (int x=0;x<9;x++)
-        {
-            for(int p=0;p<9;p++)
-            {
+        for (int x=0;x<9;x++) {
+            for(int p=0;p<9;p++) {
                 enter[x][p]= new Square();
             }
         }
@@ -25,12 +23,9 @@ public class Solver
         int [][] temptest = {{0,1,5,4,6,9,7,3,8},{4,8,7,1,3,5,6,2,9},{6,9,3,8,7,2,4,1,5},{8,6,2,3,4,1,5,9,7},{5,4,9,2,8,7,3,6,1},{7,3,1,9,5,6,2,8,4},{9,2,4,5,1,3,8,7,6},{1,7,8,6,2,4,9,5,3},{3,5,6,7,9,8,1,4,2}};
         //int [][] temptest = {{2,0,0,3,0,0,0,0,0},{8,0,4,0,6,2,0,0,3},{0,1,3,8,0,0,2,0,0},{0,0,0,0,2,0,3,9,0},{5,0,7,0,0,0,6,2,1},{0,3,2,0,0,6,0,0,0,},{0,2,0,0,0,9,1,4,0},{6,0,1,2,5,0,8,0,9},{0,0,0,0,0,1,0,0,2}};
         
-        for(int t=0;t<9;t++)
-        {
-            for(int h=0;h<9;h++)
-            {
-                if(temptest[t][h]!=0)
-                {
+        for(int t=0;t<9;t++) {
+            for(int h=0;h<9;h++) {
+                if(temptest[t][h]!=0) {
                     enter[t][h].finnum=temptest[t][h];
                     enter[t][h].fin=true;
                     if(temptest[t][h]!=1)
@@ -66,7 +61,7 @@ public class Solver
     }
     
     public Square[][] solvin(){
-        long num = 0;
+        int finals = 0;
         long temporary =0;
         do{
             temporary++;
@@ -101,8 +96,14 @@ public class Solver
                 if(vertEightNine(alpha)==true)
                     num++;
             }
-            System.out.println("    Num of changes: "+num);
-        }while(num!=0);
+            finals = 0;
+            for(int ex=0;ex<9;ex++){
+               for(int why=0;why<9;why++) {
+                  if(enter[ex][why].fin==true)
+                     finals++;
+               }
+            }
+        }while(finals!=81);
         return enter;
     }
     
@@ -110,82 +111,65 @@ public class Solver
         new TableGui(fin);
     }
     
-    private boolean columnChecker(int x, int y) {
-        int counter = 0;
+    private void columnChecker(int x, int y) {
         for(int f=0;f<9;f++) {
             if(f!=x){
                 if(enter[f][y].fin==true) {
                     switch(enter[f][y].finnum) {
-                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                     }
                 }
             }
         }
-        if (counter>0)
-            return true;
-        return false;
     }
     
-    private boolean rowChecker(int x, int y) {
-        int counter = 0;
+    private void rowChecker(int x, int y) {
         for(int f=0;f<9;f++) {
             if(f!=y){
                 if(enter[x][f].fin==true) {
                     switch(enter[x][f].finnum) {
-                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                     }
                 }
             }
         }
-        if (counter>0)
-            return true;
-        return false;
     }
     
     private boolean squareChecker(int x, int y)
     {
-        int counter =0;
-        if(x<=2)
-        {
-            if(y<=2)
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+        if(x<=2) {
+            if(y<=2) {
+                for(int q=0;q<=2;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -193,29 +177,22 @@ public class Solver
                     }
                 }
             }
-            else if(y<=5)
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=3;w<=5;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+            else if(y<=5) {
+                for(int q=0;q<=2;q++) {
+                    for(int w=3;w<=5;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -223,29 +200,22 @@ public class Solver
                     }
                 }
             }
-            else
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=6;w<=8;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+            else {
+                for(int q=0;q<=2;q++) {
+                    for(int w=6;w<=8;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -254,31 +224,23 @@ public class Solver
                 }
             }
         }
-        else if(x<=5)
-        {
-            if(y<=2)
-            {
-                for(int q=3;q<=5;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+        else if(x<=5) {
+            if(y<=2){
+                for(int q=3;q<=5;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -286,29 +248,22 @@ public class Solver
                     }
                 }
             }
-            else if(y<=5)
-            {
-                for(int q=3;q<=5;q++)
-                {
-                    for(int w=3;w<=5;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+            else if(y<=5) {
+                for(int q=3;q<=5;q++) {
+                    for(int w=3;w<=5;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -316,29 +271,22 @@ public class Solver
                     }
                 }
             }
-            else
-            {
-                for(int q=3;q<=5;q++)
-                {
-                    for(int w=6;w<=8;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+            else {
+                for(int q=3;q<=5;q++) {
+                    for(int w=6;w<=8;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -347,31 +295,23 @@ public class Solver
                 }
             }
         }
-        else
-        {
-            if(y<=2)
-            {
-                for(int q=6;q<=8;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+        else {
+            if(y<=2) {
+                for(int q=6;q<=8;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -379,29 +319,22 @@ public class Solver
                     }
                 }
             }
-            else if(y<=5)
-            {
-                for(int q=6;q<=8;q++)
-                {
-                    for(int w=3;w<=5;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+            else if(y<=5) {
+                for(int q=6;q<=8;q++) {
+                    for(int w=3;w<=5;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -409,29 +342,22 @@ public class Solver
                     }
                 }
             }
-            else
-            {
-                for(int q=6;q<=8;q++)
-                {
-                    for(int w=6;w<=8;w++)
-                    {
-                        if(x!=q)
-                        {
-                            if(y!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                {
-                                    switch(enter[q][w].finnum)
-                                    {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;counter++;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;counter++;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;counter++;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;counter++;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;counter++;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;counter++;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;counter++;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;counter++;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;counter++;}break;
+            else {
+                for(int q=6;q<=8;q++) {
+                    for(int w=6;w<=8;w++) {
+                        if(x!=q) {
+                            if(y!=w) {
+                                if(enter[q][w].fin==true) {
+                                    switch(enter[q][w].finnum) {
+                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -440,70 +366,55 @@ public class Solver
                 }
             }
         }
-        if (counter>0)
-            return true;
-        return false;
     }    
     
-    public boolean vertEightNine(int c) {
+    public void vertEightNine(int c) {
         int counte = 0;
         int differenc = 0;
-        for(int r=0;r<9;r++){
+        for(int r=0;r<9;r++) {
             if(enter[c][r].fin==true) {
                 counte++;
                 differenc+=enter[c][r].finnum;
             }
         }
         if(counte==8) {
-            int missin = 45-differenc;
-            for(int r=0;r<9;r++)
-            {
-                if(enter[c][r].fin==false)
-                {
-                    enter[c][r].fin=true;
-                    enter[c][r].finnum=missin;
-                    return true;
+            for(int r=0;r<9;r++) {
+                if(enter[c][r].fin==false) {
+                    enter[c][r].fin = true;
+                    enter[c][r].finnum = 45-differenc;
                 }
             }
         }
-        return false;
     }
     
-    public boolean horiEightNine(int d) {
+    public void horiEightNine(int d) {
         int counte = 0;
         int differenc = 0;
         for(int r=0;r<9;r++) {
             if(enter[r][d].fin==true) {
                 counte++;
-                differenc= differenc+enter[r][d].finnum;
+                differenc+=enter[r][d].finnum;
             }
         }
         if(counte==8) {
-            int missin = 45-differenc;
             for(int r=0;r<9;r++) {
                 if(enter[r][d].fin==false) {
-                    enter[r][d].fin=true;
-                    enter[r][d].finnum=missin;
-                    return true;
+                    enter[r][d].fin = true;
+                    enter[r][d].finnum = 45-differenc;
                 }
             }
         }
-        return false;
     }
     
-    public boolean boxEightNine(int apple, int banana)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void boxEightNine(int apple, int banana)
     {
         int counter =0;
-        if(apple<=2)
-        {
-            if(banana<=2)
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(apple!=q)
-                        {
+        if(apple<=2) {
+            if(banana<=2) {
+                for(int q=0;q<=2;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(apple!=q) {
                             if(banana!=w)
                                 if(enter[q][w].fin==true)
                                     counter++;
