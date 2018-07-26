@@ -493,169 +493,164 @@ public class Solver
     
     public boolean boxEightNine(int apple, int banana)
     {
-        int counter =0;
-        if(apple<=2)
-        {
-            if(banana<=2)
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                                if(enter[q][w].fin==true)
-                                    counter++;
+        int counte = 0;
+        int differenc = 0;
+        int xsection = 0;
+        int ysection = 0;
+        if(apple<=2) {
+            xsection = 1;
+            if(banana<=2) {
+                ysection = 1;
+                for(int q=0;q<=2;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(q!=apple) {
+                            if(w!=banana)
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
                         }
                     }
                 }
             }
-            else if(banana<=5)
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=2;w<=5;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
+            else if(banana<=5) {
+                ysection = 2;
+                for(int q=0;q<=2;q++) {
+                    for(int w=2;w<=5;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
                             }
                         }
                     }
                 }
             }
-            else
-            {
-                for(int q=0;q<=2;q++)
-                {
-                    for(int w=6;w<=8;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else if(apple<=5)
-        {
-            if(banana<=2)
-            {
-                for(int q=3;q<=5;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
-                            }
-                        }
-                    }
-                }
-            }
-            else if(banana<=5)
-            {
-                for(int q=3;q<=5;q++)
-                {
-                    for(int w=3;w<=5;w++)
-                    {
-                        if(apple!=q)
-                        {
-                             if(banana!=w)
-                             {
-                                if(enter[q][w].fin==true)
-                                    counter++;
-                             }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                for(int q=3;q<=5;q++)
-                {
-                    for(int w=6;w<=8;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
+            else {
+                ysection = 3;
+                for(int q=0;q<=2;q++) {
+                    for(int w=6;w<=8;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        else
-        {
-            if(banana<=2)
-            {
-                for(int q=6;q<=8;q++)
-                {
-                    for(int w=0;w<=2;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
+        else if(apple<=5) {
+            xsection = 2;
+            if(banana<=2) {
+                ysection = 1;
+                for(int q=3;q<=5;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
                             }
                         }
                     }
                 }
             }
-            else if(banana<=5)
-            {
-                for(int q=6;q<=8;q++)
-                {
-                    for(int w=3;w<=5;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
+            else if(banana<=5) {
+                ysection = 2;
+                for(int q=3;q<=5;q++) {
+                    for(int w=3;w<=5;w++) {
+                        if(apple!=q) {
+                             if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
                             }
                         }
                     }
                 }
             }
-            else
-            {
-                for(int q=6;q<=8;q++)
-                {
-                    for(int w=6;w<=8;w++)
-                    {
-                        if(apple!=q)
-                        {
-                            if(banana!=w)
-                            {
-                                if(enter[q][w].fin==true)
-                                    counter++;
+            else {
+                ysection = 3;
+                for(int q=3;q<=5;q++) {
+                    for(int w=6;w<=8;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        if (counter>0)
-            return true;
+        else {
+            xsection = 3;
+            if(banana<=2) {
+                ysection = 1;
+                for(int q=6;q<=8;q++) {
+                    for(int w=0;w<=2;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else if(banana<=5) {
+                ysection = 2;
+                for(int q=6;q<=8;q++) {
+                    for(int w=3;w<=5;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                ysection = 3;
+                for(int q=6;q<=8;q++) {
+                    for(int w=6;w<=8;w++) {
+                        if(apple!=q) {
+                            if(banana!=w) {
+                                if(enter[q][w].fin==true) {
+                                    counte++;
+                                    differenc+=enter[apple][banana].finnum;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (counte==8) {
+            for(int fin=1*xsection;fin<10;fin++) {
+                for(int ally=1*ysection;fin<10;ally++) {
+                    if(enter[fin-1][ally-1].fin==false) {
+                        enter[fin-1][ally-1].fin = true;
+                        enter[fin-1][ally-1].finnum = 45 - differenc;
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
     
