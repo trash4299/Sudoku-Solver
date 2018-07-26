@@ -616,4 +616,199 @@ public class Solver
             in.fin=true;
        }
     }
+    public void colPossibilities(int colum) {
+        int aa,bb,cc,dd,ee,ff,gg,hh,ii = 0;
+        for(int eye=0;eye<9;eye++) {
+            int nums = 0;
+            if(enter[colum][eye].fin==false) {
+                if(enter[colum][eye].a==true){
+                    aa++;
+                    nums++;
+                }
+                if(enter[colum][eye].b==true){
+                    bb++;
+                    nums++;
+                }
+                if(enter[colum][eye].c==true){
+                    cc++;
+                    nums++;
+                }
+                if(enter[colum][eye].d==true){
+                    dd++;
+                    nums++;
+                }
+                if(enter[colum][eye].e==true){
+                    ee++;
+                    nums++;
+                }
+                if(enter[colum][eye].f==true){
+                    ff++;
+                    nums++;
+                }
+                if(enter[colum][eye].g==true){
+                    gg++;
+                    nums++;
+                }
+                if(enter[colum][eye].h==true){
+                    hh++;
+                    nums++;
+                }
+                if(enter[colum][eye].i==true){
+                    ii++;
+                    nums++;
+                }
+                if(nums==1) {
+                    for(int u=0;u<9;u++) {
+                        if(enter[colum][u].fin==false) {
+                            if(enter[column][u].a==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 1;
+                                aa--;
+                            }
+                            if(enter[column][u].b==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 2;
+                                bb--;
+                            }
+                            if(enter[column][u].c==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 3;
+                                cc--;
+                            }
+                            if(enter[column][u].d==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 4;
+                                dd--;
+                            }
+                            if(enter[column][u].e==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 5;
+                                ee--;
+                            }
+                            if(enter[column][u].f==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 6;
+                                ff--;
+                            }
+                            if(enter[column][u].g==true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 7
+                                gg--
+                            }
+                            if(enter[column][u].h=true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 8
+                                hh--;
+                            }
+                            if(enter[column][u].i=true) {
+                                enter[column][u].fin = true;
+                                enter[column][u].finnum = 9
+                                ii;
+                            }
+                        }
+                    }
+                }
+                
+                if(aa==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].a==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(bb==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].b==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 2
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(cc==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].cc==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 3;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(dd==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].d==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 4;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ee==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].e==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 5;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ff==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].f==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 6;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(gg==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].g==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 7;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(hh==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].h==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 8;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ii==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(enter[colum][rack].fin==false) {
+                            if(enter[colum][rack].i==true) {
+                                enter[colum][rack].fin = true;
+                                enter[colum][rack].finnum = 9;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
