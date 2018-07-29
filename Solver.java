@@ -1,4 +1,3 @@
-
 public class Solver
 {
     public Square[][] enter;
@@ -19,7 +18,7 @@ public class Solver
         }
         
         //USED FOR TESTING
-        /*
+        
         int [][] temptest = {{0,1,5,4,6,9,7,3,8},{4,8,7,1,3,5,6,2,9},{6,9,3,8,7,2,4,1,5},{8,6,2,3,4,1,5,9,7},{5,4,9,2,8,7,3,6,1},{7,3,1,9,5,6,2,8,4},{9,2,4,5,1,3,8,7,6},{1,7,8,6,2,4,9,5,3},{3,5,6,7,9,8,1,4,2}};
         //int [][] temptest = {{2,0,0,3,0,0,0,0,0},{8,0,4,0,6,2,0,0,3},{0,1,3,8,0,0,2,0,0},{0,0,0,0,2,0,3,9,0},{5,0,7,0,0,0,6,2,1},{0,3,2,0,0,6,0,0,0,},{0,2,0,0,0,9,1,4,0},{6,0,1,2,5,0,8,0,9},{0,0,0,0,0,1,0,0,2}};
         
@@ -50,8 +49,8 @@ public class Solver
             }
         }
         //END TESTING
-        */
-        enter = inputGui();
+        
+        //enter = inputGui();
         solutionGui(solvin());
     }
     
@@ -65,36 +64,28 @@ public class Solver
         long temporary =0;
         do{
             temporary++;
-            num=0;
             System.out.println(temporary);
             for(int alpha=0;alpha<9;alpha++) {
                 System.out.print("  Alpha:"+alpha);
                 for(int beta=0;beta<9;beta++){
+                    if(enter[alpha][beta].fin==false) {
+                    	rowChecker(alpha,beta);
+                    	setFinal(enter[alpha][beta]);
+                    }
                     if(enter[alpha][beta].fin==false){
-                        if(rowChecker(alpha,beta)==true)
-                            num++;
+                        columnChecker(alpha,beta);
                         setFinal(enter[alpha][beta]);
                     }
                     if(enter[alpha][beta].fin==false){
-                        if(columnChecker(alpha,beta)==true)
-                            num++;
+                        squareChecker(alpha,beta);
                         setFinal(enter[alpha][beta]);
                     }
-                    if(enter[alpha][beta].fin==false){
-                        if(squareChecker(alpha,beta)==true)
-                            num++;
-                        setFinal(enter[alpha][beta]);
-                    }
-                    if(horiEightNine(beta)==true)
-                        num++;
-                    if(vertEightNine(beta)==true)
-                        num++;
-                    if(boxEightNine(alpha,beta)==true)
-                        num++;
+                    horiEightNine(beta);
+                    vertEightNine(beta);
+                    boxEightNine(alpha,beta);
                     System.out.print("  Beta:"+beta);
                 }
-                if(vertEightNine(alpha)==true)
-                    num++;
+                vertEightNine(alpha);
             }
             finals = 0;
             for(int ex=0;ex<9;ex++){
@@ -151,7 +142,7 @@ public class Solver
         }
     }
     
-    private boolean squareChecker(int x, int y)
+    private void squareChecker(int x, int y)
     {
         if(x<=2) {
             if(y<=2) {
@@ -617,97 +608,35 @@ public class Solver
        }
     }
     public void colPossibilities(int colum) {
-        int aa,bb,cc,dd,ee,ff,gg,hh,ii = 0;
+        int aa = 0;
+        int bb = 0;
+        int cc = 0;
+        int dd = 0;
+        int ee = 0;
+        int ff = 0;
+        int gg = 0;
+        int hh = 0;
+        int ii = 0;
         for(int eye=0;eye<9;eye++) {
-            int nums = 0;
             if(enter[colum][eye].fin==false) {
-                if(enter[colum][eye].a==true){
+                if(enter[colum][eye].a==true)
                     aa++;
-                    nums++;
-                }
-                if(enter[colum][eye].b==true){
+                if(enter[colum][eye].b==true)
                     bb++;
-                    nums++;
-                }
-                if(enter[colum][eye].c==true){
+                if(enter[colum][eye].c==true)
                     cc++;
-                    nums++;
-                }
-                if(enter[colum][eye].d==true){
+                if(enter[colum][eye].d==true)
                     dd++;
-                    nums++;
-                }
-                if(enter[colum][eye].e==true){
+                if(enter[colum][eye].e==true)
                     ee++;
-                    nums++;
-                }
-                if(enter[colum][eye].f==true){
+                if(enter[colum][eye].f==true)
                     ff++;
-                    nums++;
-                }
-                if(enter[colum][eye].g==true){
+                if(enter[colum][eye].g==true)
                     gg++;
-                    nums++;
-                }
-                if(enter[colum][eye].h==true){
+                if(enter[colum][eye].h==true)
                     hh++;
-                    nums++;
-                }
-                if(enter[colum][eye].i==true){
+                if(enter[colum][eye].i==true)
                     ii++;
-                    nums++;
-                }
-                if(nums==1) {
-                    for(int u=0;u<9;u++) {
-                        if(enter[colum][u].fin==false) {
-                            if(enter[column][u].a==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 1;
-                                aa--;
-                            }
-                            if(enter[column][u].b==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 2;
-                                bb--;
-                            }
-                            if(enter[column][u].c==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 3;
-                                cc--;
-                            }
-                            if(enter[column][u].d==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 4;
-                                dd--;
-                            }
-                            if(enter[column][u].e==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 5;
-                                ee--;
-                            }
-                            if(enter[column][u].f==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 6;
-                                ff--;
-                            }
-                            if(enter[column][u].g==true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 7
-                                gg--
-                            }
-                            if(enter[column][u].h=true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 8
-                                hh--;
-                            }
-                            if(enter[column][u].i=true) {
-                                enter[column][u].fin = true;
-                                enter[column][u].finnum = 9
-                                ii;
-                            }
-                        }
-                    }
-                }
                 
                 if(aa==1) {
                     for(int rack=0;rack<9;rack++) {
@@ -725,7 +654,7 @@ public class Solver
                         if(enter[colum][rack].fin==false) {
                             if(enter[colum][rack].b==true) {
                                 enter[colum][rack].fin = true;
-                                enter[colum][rack].finnum = 2
+                                enter[colum][rack].finnum = 2;
                                 break;
                             }
                         }
@@ -734,7 +663,7 @@ public class Solver
                 if(cc==1) {
                     for(int rack=0;rack<9;rack++) {
                         if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].cc==true) {
+                            if(enter[colum][rack].c =true) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 3;
                                 break;
