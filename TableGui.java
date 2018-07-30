@@ -98,6 +98,19 @@ public class TableGui extends JFrame implements ActionListener
     }
     
     public TableGui(Square [][] end){
+
+        JPanel p = new JPanel();
+        JTable table = new JTable(9,9);
+        table.setRowHeight(40);
+        TableColumnModel columnModel = table.getColumnModel();
+        for(int x=0;x<9;x++)
+        {
+            columnModel.getColumn(x).setPreferredWidth(15);
+        }
+        p.add(new JScrollPane(table));
+        this.add(p);
+        
+        
         for(int x=0; x<9;x++)
         {
             for(int y=0; y<9;y++)
