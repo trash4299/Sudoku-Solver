@@ -1,4 +1,3 @@
-
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -7,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.table.TableColumnModel;
+
 public class TableGui extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     public JTable table;
