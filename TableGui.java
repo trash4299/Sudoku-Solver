@@ -15,6 +15,7 @@ public class TableGui extends JFrame implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent ae){}
+    
     public TableGui() {
         elbow = new Square[9][9];
         for (int x=0;x<9;x++) {
@@ -32,20 +33,25 @@ public class TableGui extends JFrame implements ActionListener {
         }
         this.setTitle("Enter Known Values");
         JButton b1 = new JButton("Solve!");
-        p.add(b1);
-        p.add(new JScrollPane(table));
         this.add(p);
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 in = true;
             }
-        }); 
+        });
+        p.add(b1);
+        p.add(new JScrollPane(table));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
         this.pack();
         this.setVisible(true);
         while(in == false){
+        	try {
+        		Thread.sleep(0);
+        	} catch(InterruptedException e) {
+        	}
         }
         setVisible(false);
+        System.out.println("Made it!");
         
         for(int a=0;a<9;a++) {
             for(int b=0;b<9;b++) {
@@ -75,6 +81,7 @@ public class TableGui extends JFrame implements ActionListener {
                 }
             }
         }
+        System.out.print("processed");
     }
     
     public Square[][] give() {
