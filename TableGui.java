@@ -46,7 +46,7 @@ public class TableGui extends JFrame implements ActionListener {
         this.setVisible(true);
         while(in == false){
         	try {
-        		Thread.sleep(0);
+        		Thread.sleep(1);
         	} catch(InterruptedException e) {
         	}
         }
