@@ -1,9 +1,9 @@
 public class Solver
 {
-    public Square[][] enter;
+    private Square[][] enter;
     
     //TESTING
-    public int[][] temptest;
+    //private int[][] temptest;
     
     public static void main(String[] args) {
     	new Solver();
@@ -19,8 +19,8 @@ public class Solver
         
         //USED FOR TESTING
         
-        int [][] temptest = {{0,1,5,4,6,9,7,3,8},{4,8,7,1,3,5,6,2,9},{6,9,3,8,7,2,4,1,5},{8,6,2,3,4,1,5,9,7},{5,4,9,2,8,7,3,6,1},{7,3,1,9,5,6,2,8,4},{9,2,4,5,1,3,8,7,6},{1,7,8,6,2,4,9,5,3},{3,5,6,7,9,8,1,4,2}};
-        //int [][] temptest = {{2,0,0,3,0,0,0,0,0},{8,0,4,0,6,2,0,0,3},{0,1,3,8,0,0,2,0,0},{0,0,0,0,2,0,3,9,0},{5,0,7,0,0,0,6,2,1},{0,3,2,0,0,6,0,0,0,},{0,2,0,0,0,9,1,4,0},{6,0,1,2,5,0,8,0,9},{0,0,0,0,0,1,0,0,2}};
+        //int [][] temptest = {{0,1,5,4,6,9,7,3,8},{4,8,7,1,3,5,6,2,9},{6,9,3,8,7,2,4,1,5},{8,6,2,3,4,1,5,9,7},{5,4,9,2,8,7,3,6,1},{7,3,1,9,5,6,2,8,4},{9,2,4,5,1,3,8,7,6},{1,7,8,6,2,4,9,5,3},{3,5,6,7,9,8,1,4,2}};
+        int [][] temptest = {{2,0,0,3,0,0,0,0,0},{8,0,4,0,6,2,0,0,3},{0,1,3,8,0,0,2,0,0},{0,0,0,0,2,0,3,9,0},{5,0,7,0,0,0,6,2,1},{0,3,2,0,0,6,0,0,0,},{0,2,0,0,0,9,1,4,0},{6,0,1,2,5,0,8,0,9},{0,0,0,0,0,1,0,0,2}};
         
         for(int t=0;t<9;t++) {
             for(int h=0;h<9;h++) {
@@ -59,24 +59,24 @@ public class Solver
         return beginning.give();
     }
     
-    public Square[][] solvin(){
+    private Square[][] solvin(){
+        long temporary = 0;
         int finals = 0;
-        long temporary =0;
         do{
             temporary++;
             System.out.println(temporary);
             for(int alpha=0;alpha<9;alpha++) {
                 System.out.print("  Alpha:"+alpha);
                 for(int beta=0;beta<9;beta++){
-                    if(enter[alpha][beta].fin==false) {
+                    if(!enter[alpha][beta].fin) {
                     	rowChecker(alpha,beta);
                     	setFinal(enter[alpha][beta]);
                     }
-                    if(enter[alpha][beta].fin==false){
+                    if(!enter[alpha][beta].fin){
                         columnChecker(alpha,beta);
                         setFinal(enter[alpha][beta]);
                     }
-                    if(enter[alpha][beta].fin==false){
+                    if(!enter[alpha][beta].fin){
                         squareChecker(alpha,beta);
                         setFinal(enter[alpha][beta]);
                     }
@@ -86,11 +86,11 @@ public class Solver
                     System.out.print("  Beta:"+beta);
                 }
                 vertEightNine(alpha);
+                colPossibilities(alpha);
             }
-            finals = 0;
             for(int ex=0;ex<9;ex++){
                for(int why=0;why<9;why++) {
-                  if(enter[ex][why].fin==true)
+                  if(enter[ex][why].fin)
                      finals++;
                }
             }
@@ -105,17 +105,17 @@ public class Solver
     private void columnChecker(int x, int y) {
         for(int f=0;f<9;f++) {
             if(f!=x){
-                if(enter[f][y].fin==true) {
+                if(enter[f][y].fin) {
                     switch(enter[f][y].finnum) {
-                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                     }
                 }
             }
@@ -125,42 +125,41 @@ public class Solver
     private void rowChecker(int x, int y) {
         for(int f=0;f<9;f++) {
             if(f!=y){
-                if(enter[x][f].fin==true) {
+                if(enter[x][f].fin) {
                     switch(enter[x][f].finnum) {
-                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                     }
                 }
             }
         }
     }
-    
-    private void squareChecker(int x, int y)
-    {
+
+    private void squareChecker(int x, int y) {
         if(x<=2) {
             if(y<=2) {
                 for(int q=0;q<=2;q++) {
                     for(int w=0;w<=2;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -173,17 +172,17 @@ public class Solver
                     for(int w=3;w<=5;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -196,17 +195,17 @@ public class Solver
                     for(int w=6;w<=8;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -221,17 +220,17 @@ public class Solver
                     for(int w=0;w<=2;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -244,17 +243,17 @@ public class Solver
                     for(int w=3;w<=5;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -267,17 +266,17 @@ public class Solver
                     for(int w=6;w<=8;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -292,17 +291,17 @@ public class Solver
                     for(int w=0;w<=2;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -315,17 +314,17 @@ public class Solver
                     for(int w=3;w<=5;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -338,17 +337,17 @@ public class Solver
                     for(int w=6;w<=8;w++) {
                         if(x!=q) {
                             if(y!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     switch(enter[q][w].finnum) {
-                                        case 1:if(enter[x][y].a!=false){enter[x][y].a=false;}break;
-                                        case 2:if(enter[x][y].b!=false){enter[x][y].b=false;}break;
-                                        case 3:if(enter[x][y].c!=false){enter[x][y].c=false;}break;
-                                        case 4:if(enter[x][y].d!=false){enter[x][y].d=false;}break;
-                                        case 5:if(enter[x][y].e!=false){enter[x][y].e=false;}break;
-                                        case 6:if(enter[x][y].f!=false){enter[x][y].f=false;}break;
-                                        case 7:if(enter[x][y].g!=false){enter[x][y].g=false;}break;
-                                        case 8:if(enter[x][y].h!=false){enter[x][y].h=false;}break;
-                                        case 9:if(enter[x][y].i!=false){enter[x][y].i=false;}break;
+                                        case 1:if(enter[x][y].a){enter[x][y].a=false;}break;
+                                        case 2:if(enter[x][y].b){enter[x][y].b=false;}break;
+                                        case 3:if(enter[x][y].c){enter[x][y].c=false;}break;
+                                        case 4:if(enter[x][y].d){enter[x][y].d=false;}break;
+                                        case 5:if(enter[x][y].e){enter[x][y].e=false;}break;
+                                        case 6:if(enter[x][y].f){enter[x][y].f=false;}break;
+                                        case 7:if(enter[x][y].g){enter[x][y].g=false;}break;
+                                        case 8:if(enter[x][y].h){enter[x][y].h=false;}break;
+                                        case 9:if(enter[x][y].i){enter[x][y].i=false;}break;
                                     }
                                 }
                             }
@@ -363,14 +362,14 @@ public class Solver
         int counte = 0;
         int differenc = 0;
         for(int r=0;r<9;r++) {
-            if(enter[c][r].fin==true) {
+            if(enter[c][r].fin) {
                 counte++;
                 differenc+=enter[c][r].finnum;
             }
         }
         if(counte==8) {
             for(int r=0;r<9;r++) {
-                if(enter[c][r].fin==false) {
+                if(!enter[c][r].fin) {
                     enter[c][r].fin = true;
                     enter[c][r].finnum = 45-differenc;
                 }
@@ -382,14 +381,14 @@ public class Solver
         int counte = 0;
         int differenc = 0;
         for(int r=0;r<9;r++) {
-            if(enter[r][d].fin==true) {
+            if(enter[r][d].fin) {
                 counte++;
                 differenc+=enter[r][d].finnum;
             }
         }
         if(counte==8) {
             for(int r=0;r<9;r++) {
-                if(enter[r][d].fin==false) {
+                if(!enter[r][d].fin) {
                     enter[r][d].fin = true;
                     enter[r][d].finnum = 45-differenc;
                 }
@@ -400,17 +399,16 @@ public class Solver
     public void boxEightNine(int apple, int banana) {
         int counte = 0;
         int differenc = 0;
-        int xsection = 0;
-        int ysection = 0;
+        int xsection, ysection;
         if(apple<=2) {
-            xsection = 1;
+            xsection = 0;
             if(banana<=2) {
-                ysection = 1;
+                ysection = 0;
                 for(int q=0;q<=2;q++) {
                     for(int w=0;w<=2;w++) {
                         if(q!=apple) {
                             if(w!=banana)
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -419,12 +417,12 @@ public class Solver
                 }
             }
             else if(banana<=5) {
-                ysection = 2;
+                ysection = 3;
                 for(int q=0;q<=2;q++) {
                     for(int w=2;w<=5;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -434,12 +432,12 @@ public class Solver
                 }
             }
             else {
-                ysection = 3;
+                ysection = 6;
                 for(int q=0;q<=2;q++) {
                     for(int w=6;w<=8;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -450,14 +448,14 @@ public class Solver
             }
         }
         else if(apple<=5) {
-            xsection = 2;
+            xsection = 3;
             if(banana<=2) {
-                ysection = 1;
+                ysection = 0;
                 for(int q=3;q<=5;q++) {
                     for(int w=0;w<=2;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -467,12 +465,12 @@ public class Solver
                 }
             }
             else if(banana<=5) {
-                ysection = 2;
+                ysection = 3;
                 for(int q=3;q<=5;q++) {
                     for(int w=3;w<=5;w++) {
                         if(apple!=q) {
                              if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -482,12 +480,12 @@ public class Solver
                 }
             }
             else {
-                ysection = 3;
+                ysection = 6;
                 for(int q=3;q<=5;q++) {
                     for(int w=6;w<=8;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -498,14 +496,14 @@ public class Solver
             }
         }
         else {
-            xsection = 3;
+            xsection = 6;
             if(banana<=2) {
-                ysection = 1;
+                ysection = 0;
                 for(int q=6;q<=8;q++) {
                     for(int w=0;w<=2;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -515,12 +513,12 @@ public class Solver
                 }
             }
             else if(banana<=5) {
-                ysection = 2;
+                ysection = 3;
                 for(int q=6;q<=8;q++) {
                     for(int w=3;w<=5;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -530,12 +528,12 @@ public class Solver
                 }
             }
             else {
-                ysection = 3;
+                ysection = 6;
                 for(int q=6;q<=8;q++) {
                     for(int w=6;w<=8;w++) {
                         if(apple!=q) {
                             if(banana!=w) {
-                                if(enter[q][w].fin==true) {
+                                if(enter[q][w].fin) {
                                     counte++;
                                     differenc+=enter[apple][banana].finnum;
                                 }
@@ -546,11 +544,11 @@ public class Solver
             }
         }
         if (counte==8) {
-            for(int fin=1*xsection;fin<10;fin++) {
-                for(int ally=1*ysection;fin<10;ally++) {
-                    if(enter[fin-1][ally-1].fin==false) {
-                        enter[fin-1][ally-1].fin = true;
-                        enter[fin-1][ally-1].finnum = 45 - differenc;
+            for(int xx=xsection;xx-xsection<3;xx++) {
+                for(int yy=ysection;yy-ysection<3;yy++) {
+                    if(!enter[xx][yy].fin) {
+                        enter[xx][yy].fin = true;
+                        enter[xx][yy].finnum = 45 - differenc;
                     }
                 }
             }
@@ -558,25 +556,25 @@ public class Solver
     }
     
     public boolean checkFinal(Square sample) {
-        if(sample.fin==false) {
+        if(!sample.fin) {
             int yeck=0;
-            if(sample.a==true)
+            if(sample.a)
                 yeck++;
-            if(sample.b==true)
+            if(sample.b)
                 yeck++;
-            if(sample.c==true)
+            if(sample.c)
                 yeck++;
-            if(sample.d==true)
+            if(sample.d)
                 yeck++;
-            if(sample.e==true)
+            if(sample.e)
                 yeck++;
-            if(sample.f==true)
+            if(sample.f)
                 yeck++;
-            if(sample.g==true)
+            if(sample.g)
                 yeck++;
-            if(sample.h==true)
+            if(sample.h)
                 yeck++;
-            if(sample.i==true)
+            if(sample.i)
                 yeck++;
             if(yeck==1)
             return true;
@@ -585,24 +583,24 @@ public class Solver
     }
     
     public void setFinal(Square in) {
-       if(checkFinal(in)==true) {
-            if(in.a==true)
+       if(checkFinal(in)) {
+            if(in.a)
                 in.finnum=1;
-            else if(in.b==true)
+            else if(in.b)
                 in.finnum=2;
-            else if(in.c==true)
+            else if(in.c)
                 in.finnum=3;
-            else if(in.d==true)
+            else if(in.d)
                 in.finnum=4;
-            else if(in.e==true)
+            else if(in.e)
                 in.finnum=5;
-            else if(in.f==true)
+            else if(in.f)
                 in.finnum=6;
-            else if(in.g==true)
+            else if(in.g)
                 in.finnum=7;
-            else if(in.h==true)
+            else if(in.h)
                 in.finnum=8;
-            else if(in.i==true)
+            else if(in.i)
                 in.finnum=9;
             in.fin=true;
        }
@@ -618,30 +616,30 @@ public class Solver
         int hh = 0;
         int ii = 0;
         for(int eye=0;eye<9;eye++) {
-            if(enter[colum][eye].fin==false) {
-                if(enter[colum][eye].a==true)
+            if(!enter[colum][eye].fin) {
+                if(enter[colum][eye].a)
                     aa++;
-                if(enter[colum][eye].b==true)
+                if(enter[colum][eye].b)
                     bb++;
-                if(enter[colum][eye].c==true)
+                if(enter[colum][eye].c)
                     cc++;
-                if(enter[colum][eye].d==true)
+                if(enter[colum][eye].d)
                     dd++;
-                if(enter[colum][eye].e==true)
+                if(enter[colum][eye].e)
                     ee++;
-                if(enter[colum][eye].f==true)
+                if(enter[colum][eye].f)
                     ff++;
-                if(enter[colum][eye].g==true)
+                if(enter[colum][eye].g)
                     gg++;
-                if(enter[colum][eye].h==true)
+                if(enter[colum][eye].h)
                     hh++;
-                if(enter[colum][eye].i==true)
+                if(enter[colum][eye].i)
                     ii++;
-                
+
                 if(aa==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].a==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].a) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 1;
                                 break;
@@ -651,8 +649,8 @@ public class Solver
                 }
                 if(bb==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].b==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].b) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 2;
                                 break;
@@ -662,7 +660,7 @@ public class Solver
                 }
                 if(cc==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
+                        if(!enter[colum][rack].fin) {
                             if(enter[colum][rack].c =true) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 3;
@@ -673,8 +671,8 @@ public class Solver
                 }
                 if(dd==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].d==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].d) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 4;
                                 break;
@@ -684,8 +682,8 @@ public class Solver
                 }
                 if(ee==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].e==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].e) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 5;
                                 break;
@@ -695,8 +693,8 @@ public class Solver
                 }
                 if(ff==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].f==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].f) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 6;
                                 break;
@@ -706,8 +704,8 @@ public class Solver
                 }
                 if(gg==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].g==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].g) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 7;
                                 break;
@@ -717,8 +715,8 @@ public class Solver
                 }
                 if(hh==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].h==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].h) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 8;
                                 break;
@@ -728,8 +726,8 @@ public class Solver
                 }
                 if(ii==1) {
                     for(int rack=0;rack<9;rack++) {
-                        if(enter[colum][rack].fin==false) {
-                            if(enter[colum][rack].i==true) {
+                        if(!enter[colum][rack].fin) {
+                            if(enter[colum][rack].i) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 9;
                                 break;
