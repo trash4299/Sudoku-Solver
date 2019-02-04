@@ -7,14 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.table.TableColumnModel;
 
-public class TableGui extends JFrame implements ActionListener {
+class TableGui extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
-    public JTable table;
     private boolean in;
-    public Square [][] elbow;
-    
+    private Square [][] elbow;
+
     @Override
-    public void actionPerformed(ActionEvent ae){}
+    public void actionPerformed(ActionEvent ae) {
+    }
     
     public TableGui() {
         elbow = new Square[9][9];
@@ -26,6 +26,7 @@ public class TableGui extends JFrame implements ActionListener {
         in = false;
         JPanel p = new JPanel();
         JTable table = new JTable(9,9);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         table.setRowHeight(40);
         TableColumnModel columnModel = table.getColumnModel();
         for(int x=0;x<9;x++) {
@@ -44,17 +45,17 @@ public class TableGui extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
         this.pack();
         this.setVisible(true);
-        while(in == false){
+        while(!in){
         	try {
         		Thread.sleep(1);
-        	} catch(InterruptedException e) {
+        	} catch(InterruptedException ignored) {
         	}
         }
         setVisible(false);        
         for(int a=0;a<9;a++) {
             for(int b=0;b<9;b++) {
                 String temp = (String) table.getModel().getValueAt(a,b);
-                if(temp!=null&&temp!="") {
+                if(temp!=null&&temp!=""&&!temp.equals("")) {
                     int schlep = Integer.parseInt(temp);
                     elbow[a][b].finnum = schlep;
                     elbow[a][b].fin=true;
@@ -88,6 +89,7 @@ public class TableGui extends JFrame implements ActionListener {
     public TableGui(Square [][] end) {
         JPanel p = new JPanel();
         JTable table = new JTable(9,9);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         table.setRowHeight(40);
         TableColumnModel columnModel = table.getColumnModel();
         for(int x=0;x<9;x++) {
