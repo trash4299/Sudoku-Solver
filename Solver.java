@@ -1,7 +1,6 @@
 public class Solver
 {
     private Square[][] enter;
-    private int[][] temptest;
     
     public static void main(String[] args) {
     	new Solver();
@@ -12,32 +11,6 @@ public class Solver
         for (int x=0;x<9;x++) {
             for(int p=0;p<9;p++) {
                 enter[x][p]= new Square();
-            }
-        }
-        for(int t=0;t<9;t++) {
-            for(int h=0;h<9;h++) {
-                if(temptest[t][h]!=0) {
-                    enter[t][h].finnum=temptest[t][h];
-                    enter[t][h].fin=true;
-                    if(temptest[t][h]!=1)
-                        enter[t][h].a=false;
-                    if(temptest[t][h]!=2)
-                        enter[t][h].b=false;
-                    if(temptest[t][h]!=3)
-                        enter[t][h].c=false;
-                    if(temptest[t][h]!=4)
-                        enter[t][h].d=false;
-                    if(temptest[t][h]!=5)
-                        enter[t][h].e=false;
-                    if(temptest[t][h]!=6)
-                        enter[t][h].f=false;
-                    if(temptest[t][h]!=7)
-                        enter[t][h].g=false;
-                    if(temptest[t][h]!=8)
-                        enter[t][h].h=false;
-                    if(temptest[t][h]!=9)
-                        enter[t][h].i=false;
-                }
             }
         }
         enter = inputGui();
