@@ -1,4 +1,4 @@
-public class Solver
+class Solver
 {
     private Square[][] enter;
     
@@ -6,7 +6,7 @@ public class Solver
     	new Solver();
     }
     
-    public Solver() {
+    private Solver() {
         enter = new Square[9][9];
         for (int x=0;x<9;x++) {
             for(int p=0;p<9;p++) {
@@ -17,7 +17,7 @@ public class Solver
         solutionGui(solvin());
     }
     
-    public Square [][] inputGui() {
+    private Square [][] inputGui() {
         TableGui beginning = new TableGui();
         return beginning.give();
     }
@@ -27,9 +27,7 @@ public class Solver
         int finals = 0;
         do{
             temporary++;
-            System.out.println(temporary);
             for(int alpha=0;alpha<9;alpha++) {
-                System.out.print("  Alpha:"+alpha);
                 for(int beta=0;beta<9;beta++){
                     if(!enter[alpha][beta].fin) {
                     	rowChecker(alpha,beta);
@@ -43,10 +41,10 @@ public class Solver
                         squareChecker(alpha,beta);
                         setFinal(enter[alpha][beta]);
                     }
+                    rowPossibilities(beta);
                     horiEightNine(beta);
                     vertEightNine(beta);
                     boxEightNine(alpha,beta);
-                    System.out.print("  Beta:"+beta);
                 }
                 vertEightNine(alpha);
                 colPossibilities(alpha);
@@ -61,7 +59,7 @@ public class Solver
         return enter;
     }
     
-    public void solutionGui(Square [][] fin) {
+    private void solutionGui(Square[][] fin) {
         new TableGui(fin);
     }
     
@@ -321,7 +319,7 @@ public class Solver
         }
     }    
     
-    public void vertEightNine(int c) {
+    private void vertEightNine(int c) {
         int counte = 0;
         int differenc = 0;
         for(int r=0;r<9;r++) {
@@ -340,7 +338,7 @@ public class Solver
         }
     }
     
-    public void horiEightNine(int d) {
+    private void horiEightNine(int d) {
         int counte = 0;
         int differenc = 0;
         for(int r=0;r<9;r++) {
@@ -359,150 +357,17 @@ public class Solver
         }
     }
     
-    public void boxEightNine(int apple, int banana) {
+    private void boxEightNine(int apple, int banana) {
         int counte = 0;
         int differenc = 0;
-        int xsection, ysection;
-        if(apple<=2) {
-            xsection = 0;
-            if(banana<=2) {
-                ysection = 0;
-                for(int q=0;q<=2;q++) {
-                    for(int w=0;w<=2;w++) {
-                        if(q!=apple) {
-                            if(w!=banana)
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                        }
-                    }
-                }
-            }
-            else if(banana<=5) {
-                ysection = 3;
-                for(int q=0;q<=2;q++) {
-                    for(int w=2;w<=5;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                ysection = 6;
-                for(int q=0;q<=2;q++) {
-                    for(int w=6;w<=8;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else if(apple<=5) {
-            xsection = 3;
-            if(banana<=2) {
-                ysection = 0;
-                for(int q=3;q<=5;q++) {
-                    for(int w=0;w<=2;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else if(banana<=5) {
-                ysection = 3;
-                for(int q=3;q<=5;q++) {
-                    for(int w=3;w<=5;w++) {
-                        if(apple!=q) {
-                             if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                ysection = 6;
-                for(int q=3;q<=5;q++) {
-                    for(int w=6;w<=8;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            xsection = 6;
-            if(banana<=2) {
-                ysection = 0;
-                for(int q=6;q<=8;q++) {
-                    for(int w=0;w<=2;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else if(banana<=5) {
-                ysection = 3;
-                for(int q=6;q<=8;q++) {
-                    for(int w=3;w<=5;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                ysection = 6;
-                for(int q=6;q<=8;q++) {
-                    for(int w=6;w<=8;w++) {
-                        if(apple!=q) {
-                            if(banana!=w) {
-                                if(enter[q][w].fin) {
-                                    counte++;
-                                    differenc+=enter[apple][banana].finnum;
-                                }
-                            }
-                        }
-                    }
+        int xsection = apple/3;
+        int ysection = banana/3;
+
+        for(int g=3*xsection;g<(3*xsection+2);g++) {
+            for(int h=3*ysection;h<(3*ysection+2);h++) {
+                if(g!=xsection&&h!=ysection&&enter[g][h].fin) {
+                    counte++;
+                    differenc+=enter[apple][banana].finnum;
                 }
             }
         }
@@ -518,7 +383,7 @@ public class Solver
         }
     }
     
-    public boolean checkFinal(Square sample) {
+    private boolean checkFinal(Square sample) {
         if(!sample.fin) {
             int yeck=0;
             if(sample.a)
@@ -545,7 +410,7 @@ public class Solver
         return false;
     }
     
-    public void setFinal(Square in) {
+    private void setFinal(Square in) {
        if(checkFinal(in)) {
             if(in.a)
                 in.finnum=1;
@@ -568,7 +433,8 @@ public class Solver
             in.fin=true;
        }
     }
-    public void colPossibilities(int colum) {
+
+    private void colPossibilities(int colum) {
         int aa = 0;
         int bb = 0;
         int cc = 0;
@@ -693,6 +559,140 @@ public class Solver
                             if(enter[colum][rack].i) {
                                 enter[colum][rack].fin = true;
                                 enter[colum][rack].finnum = 9;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void rowPossibilities(int ro) {
+        int aa = 0;
+        int bb = 0;
+        int cc = 0;
+        int dd = 0;
+        int ee = 0;
+        int ff = 0;
+        int gg = 0;
+        int hh = 0;
+        int ii = 0;
+        for(int eye=0;eye<9;eye++) {
+            if(!enter[eye][ro].fin) {
+                if(enter[eye][ro].a)
+                    aa++;
+                if(enter[eye][ro].b)
+                    bb++;
+                if(enter[eye][ro].c)
+                    cc++;
+                if(enter[eye][ro].d)
+                    dd++;
+                if(enter[eye][ro].e)
+                    ee++;
+                if(enter[eye][ro].f)
+                    ff++;
+                if(enter[eye][ro].g)
+                    gg++;
+                if(enter[eye][ro].h)
+                    hh++;
+                if(enter[eye][ro].i)
+                    ii++;
+
+                if(aa==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].a) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(bb==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].b) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 2;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(cc==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].c =true) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 3;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(dd==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].d) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 4;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ee==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].e) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 5;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ff==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].f) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 6;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(gg==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].g) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 7;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(hh==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].h) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 8;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ii==1) {
+                    for(int rack=0;rack<9;rack++) {
+                        if(!enter[rack][ro].fin) {
+                            if(enter[rack][ro].i) {
+                                enter[rack][ro].fin = true;
+                                enter[rack][ro].finnum = 9;
                                 break;
                             }
                         }
