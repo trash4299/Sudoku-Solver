@@ -23,10 +23,8 @@ class Solver
     }
     
     private Square[][] solvin(){
-        long temporary = 0;
         int finals = 0;
         do{
-            temporary++;
             for(int alpha=0;alpha<9;alpha++) {
                 for(int beta=0;beta<9;beta++){
                     if(!enter[alpha][beta].fin) {
